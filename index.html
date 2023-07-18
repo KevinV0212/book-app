@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <script src="./main.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <button class="toggle-form">New Book</button>
+        <div class="form-wrapper">
+            <form>
+                <h2>Add new Book</h2>
+                <div>
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title">
+                </div>
+                <div>
+                    <label for="author">Author</label>
+                    <input type="text" id="author" name="author">
+                </div>
+                <div>
+                    <label for="pages">Number of Pages</label>
+                    <input type="number" id="num-pages" name="num-pages">
+                </div>
+                <div>
+                    <fieldset>
+                        <legend>Have you read this book?</legend>
+            
+                        <input type="radio" id="yes" name="read-status">
+                        <label for="yes">Yes</label>
+                        <input type="radio" id="no" name="read-status">
+                        <label for="no">No</label>
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+        <div class="bookshelf">
+            
+        </div>
+    </div>
+</body>
+</html>
