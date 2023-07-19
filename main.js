@@ -26,26 +26,35 @@ const bookshelf = document.querySelector('.bookshelf');
 // loops through myLibrary and displays all books as 'card' elements
 function displayBookshelf()
 {
+    let index = 0;
     myLibrary.forEach(function(book){
-        newCard = document.createElement('div');
+        let newCard = document.createElement('div');
         newCard.classList.add('card');
         newCard.textContent = book.info();
+
+
+        //add delete button to entry
+        let deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-button');
+        deleteButton.setAttribute('data-index', `${index++}`)
+        deleteButton.innerHTML = 'x';
+        newCard.appendChild(deleteButton);
         bookshelf.appendChild(newCard);
     })
+
+    addDeleteListeners();
 }
 
-addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 255, true);
+addBookToLibrary('test1', 'J.R.R. Tolkien', 255, true);
+addBookToLibrary('test2', 'J.R.R. Tolkien', 255, true);
+addBookToLibrary('test3', 'J.R.R. Tolkien', 255, true);
+
 displayBookshelf();
 
 // toggle displaying add book form 
 const formToggler = document.querySelector('.form-toggler');
 const formWrapper = document.querySelector('.form-wrapper');
-formToggler.addEventListener('click', (e) => {
-    if (formWrapper.style.display != 'block')
-        formWrapper.style.display = 'block';
-    else 
-        formWrapper.style.display = 'none';
-})
+formToggler.addEventListener('click', toggleForm)
 
 // add new book when add book button is pressed
 const titleField = document.querySelector('input#title');
@@ -68,9 +77,28 @@ addBtn.addEventListener('click', (e) => {
         isRead = true;
     addBookToLibrary(title, author, pageNum, isRead);
     clearForm();
+    toggleForm();
+    clearBookshelf();
+    displayBookshelf();
 })
 
+
+// function that adds listeners to delete buttons to remove cards
+function addDeleteListeners() {
+    let deleteButtons = document.querySelectorAll('.delete-button');
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const index = e.target.getAttribute('data-index');
+            myLibrary.splice(+index, 1);
+            clearBookshelf();
+            displayBookshelf();
+        })
+    })
+}
+
 // methods for interacting with form content;
+
 
 // function that clears all fields in add book form
 function clearForm()
@@ -82,3 +110,20 @@ function clearForm()
     statusYes.checked = false;
     statusNo.checked = false;
 }
+
+function toggleForm() {
+    if (window.getComputedStyle(formWrapper).display === 'block')
+        formWrapper.style.display = 'none';
+    else 
+        formWrapper.style.display = 'block';
+}
+
+function clearBookshelf() {
+    bookshelf.innerHTML = '';
+}
+
+// function that removes Book at 'index' from myLibrary:
+function deleteBook(index) {
+
+}
+
