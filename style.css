@@ -13,7 +13,7 @@ body{
 }
 
 .form-wrapper{
-    display:none;
+    /* display:none; */
 }
 form{
     width:400px;

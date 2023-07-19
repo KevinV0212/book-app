@@ -35,14 +35,50 @@ function displayBookshelf()
 }
 
 addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 255, true);
-console.log(myLibrary);
 displayBookshelf();
 
-const formToggler = document.querySelector('.form-toggler')
-const formWrapper = document.querySelector('.form-wrapper')
+// toggle displaying add book form 
+const formToggler = document.querySelector('.form-toggler');
+const formWrapper = document.querySelector('.form-wrapper');
 formToggler.addEventListener('click', (e) => {
-    if (formWrapper.style.display === 'none')
-        formWrapper.style.display = 'block'
+    if (formWrapper.style.display != 'block')
+        formWrapper.style.display = 'block';
     else 
-        formWrapper.style.display = 'none'
+        formWrapper.style.display = 'none';
 })
+
+// add new book when add book button is pressed
+const titleField = document.querySelector('input#title');
+const authorField = document.querySelector('input#author');
+const pageField = document.querySelector('input#num-pages');
+const statusYes = document.querySelector('input#yes');
+const statusNo = document.querySelector('input#no');
+const addBtn = document.querySelector('.add-btn');
+
+
+// change behavior for radio buttons
+addBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    // check for field completion
+    let title = titleField.value;
+    let author = authorField.value;
+    let pageNum = pageField.value;
+    let isRead = false;
+    if (statusYes.checked === true)
+        isRead = true;
+    addBookToLibrary(title, author, pageNum, isRead);
+    clearForm();
+})
+
+// methods for interacting with form content;
+
+// function that clears all fields in add book form
+function clearForm()
+{
+    titleField.value = '';
+    authorField.value = '';
+    authorField.value = '';
+    pageField.value = '';
+    statusYes.checked = false;
+    statusNo.checked = false;
+}
