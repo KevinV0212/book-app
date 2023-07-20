@@ -65,12 +65,6 @@ function displayBookshelf()
     addDeleteListeners();
 }
 
-addBookToLibrary('test1', 'J.R.R. Tolkien', 255, true);
-addBookToLibrary('test2', 'J.R.R. Tolkien', 255, true);
-addBookToLibrary('test3', 'J.R.R. Tolkien', 255, true);
-
-displayBookshelf();
-
 // toggle displaying add book form 
 const formToggler = document.querySelector('.form-toggler');
 const formWrapper = document.querySelector('.form-wrapper');
