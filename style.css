@@ -8,6 +8,11 @@
     --base-light:#5C5C5C;
     --base-dark:#1F1F1F;
 }
+
+html{
+    font-size:16px;
+    font-family: 'Dosis', sans-serif;
+}
 *{
     margin: 0; padding: 0;
 }
@@ -27,9 +32,13 @@ body{
     align-items:center;
     gap:30px;
 }
+
+.site-title{
+    font-size:2.5rem;
+    color:var(--off-white);
+}
 .form-wrapper {
-    display:block;
-    /* display:none; */
+    display:none;
 }
 form, .bookshelf{
     width:400px;
@@ -51,6 +60,7 @@ form, .bookshelf{
     width:80%;
     padding:10px 20px;
 
+    font-size:1.5em;
     color:var(--off-white);
     border-bottom:2px solid var(--base);
     text-align:center;
@@ -79,10 +89,16 @@ form, .bookshelf{
 
 fieldset legend{
     align-self:center;
+
+    font-size:1rem;
+    font-weight:600;
 }
 
-.form-section > label {
+label {
     justify-self:end;
+
+    font-size:1rem;
+    font-weight:600;
 }
 
 /* soft input and button resets */
@@ -106,8 +122,10 @@ input[type="number"]
 button {
     appearance:none;
     padding: 10px 30px;
+    
     border:none;
     border-radius:10px;
+    font-size:1em;
     cursor:pointer;
 }
 
@@ -118,7 +136,14 @@ form .add-btn, .form-toggler{
     color:white;
 }
 .delete-button{
+    display:block;
+    padding:5px;
+    width:30px;
+    height:30px;
     background-color:var(--off-red);
+    
+    text-align:center;
+    font-size:1rem;
     color:white;
 }
 
@@ -149,4 +174,16 @@ form .add-btn, .form-toggler{
     padding:10px;
 }
 
-/* styling for interactivity */
+/* styling for basic interactivity */
+button:hover,
+label:hover{
+    filter:brightness(.8);
+}
+button:active,
+label:active{
+    filter:brightness(.6);
+}
+
+label:hover{
+    cursor:pointer;
+}
