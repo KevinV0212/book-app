@@ -19,9 +19,11 @@ function addBookToLibrary(title, author, numPages, isRead) {
     let newBook = new Book(title, author, numPages, isRead);
     // push into myLibrary
     myLibrary.push(newBook);
+    clearBooks;
+    displayBookshelf
 }
 
-const bookshelf = document.querySelector('.bookshelf');
+const books = document.querySelector('.books');
 
 // loops through myLibrary and displays all books as 'card' elements
 function displayBookshelf()
@@ -30,16 +32,28 @@ function displayBookshelf()
     myLibrary.forEach(function(book){
         let newCard = document.createElement('div');
         newCard.classList.add('card');
-        newCard.textContent = book.info();
+        
+        let cardInfo = document.createElement('div');
+        cardInfo.classList.add('card-info');
+        cardInfo.textContent = book.info();
 
 
         //add delete button to entry
+        let cardControls = document.createElement('card-controls');
+        cardControls.classList.add('card-controls');
+
         let deleteButton = document.createElement('button');
         deleteButton.classList.add('delete-button');
         deleteButton.setAttribute('data-index', `${index++}`)
         deleteButton.innerHTML = 'x';
-        newCard.appendChild(deleteButton);
-        bookshelf.appendChild(newCard);
+        cardControls.appendChild(deleteButton);
+
+
+        // append card sections
+        newCard.appendChild(cardInfo);
+        newCard.appendChild(cardControls);
+
+        books.appendChild(newCard);
     })
 
     addDeleteListeners();
@@ -78,7 +92,7 @@ addBtn.addEventListener('click', (e) => {
     addBookToLibrary(title, author, pageNum, isRead);
     clearForm();
     toggleForm();
-    clearBookshelf();
+    clearBooks();
     displayBookshelf();
 })
 
@@ -91,7 +105,7 @@ function addDeleteListeners() {
         button.addEventListener('click', (e) => {
             const index = e.target.getAttribute('data-index');
             myLibrary.splice(+index, 1);
-            clearBookshelf();
+            clearBooks();
             displayBookshelf();
         })
     })
@@ -118,12 +132,7 @@ function toggleForm() {
         formWrapper.style.display = 'block';
 }
 
-function clearBookshelf() {
-    bookshelf.innerHTML = '';
-}
-
-// function that removes Book at 'index' from myLibrary:
-function deleteBook(index) {
-
+function clearBooks() {
+    books.innerHTML = '';
 }
 
