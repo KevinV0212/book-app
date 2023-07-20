@@ -1,3 +1,11 @@
+const titleField = document.querySelector('input#title');
+const authorField = document.querySelector('input#author');
+const pageField = document.querySelector('input#num-pages');
+const statusYes = document.querySelector('input#yes');
+const statusNo = document.querySelector('input#no');
+const addBtn = document.querySelector('.add-btn');
+const formError = document.querySelector('.form-error');
+
 let myLibrary = [];
 
 // Book object constructor
@@ -9,7 +17,7 @@ function Book(title, author, numPages, isRead) {
 
     this.info = function() {
         return(
-        `${title} by ${author}, ${numPages} pages, ${isRead ? 'already read' : 'not read yet'}`)
+        `${title} by ${author}, ${numPages} pages, ${isRead ? ' read' : 'rot read yet'}`)
     }
 }
 
@@ -19,8 +27,6 @@ function addBookToLibrary(title, author, numPages, isRead) {
     let newBook = new Book(title, author, numPages, isRead);
     // push into myLibrary
     myLibrary.push(newBook);
-    clearBooks;
-    displayBookshelf
 }
 
 const books = document.querySelector('.books');
@@ -70,13 +76,6 @@ const formToggler = document.querySelector('.form-toggler');
 const formWrapper = document.querySelector('.form-wrapper');
 formToggler.addEventListener('click', toggleForm)
 
-// add new book when add book button is pressed
-const titleField = document.querySelector('input#title');
-const authorField = document.querySelector('input#author');
-const pageField = document.querySelector('input#num-pages');
-const statusYes = document.querySelector('input#yes');
-const statusNo = document.querySelector('input#no');
-const addBtn = document.querySelector('.add-btn');
 
 
 // change behavior for radio buttons
@@ -88,7 +87,15 @@ addBtn.addEventListener('click', (e) => {
     let pageNum = pageField.value;
     let isRead = false;
     if (statusYes.checked === true)
+    {
         isRead = true;
+    }
+        
+    if (!isFilled())
+    {
+        formError.textContent = 'Please fill in all fields *';
+        return;
+    }
     addBookToLibrary(title, author, pageNum, isRead);
     clearForm();
     toggleForm();
@@ -111,8 +118,11 @@ function addDeleteListeners() {
     })
 }
 
-// methods for interacting with form content;
-
+// function that checks if all of the input fields are filled in
+function isFilled() {
+    return (titleField.value && authorField.value && pageField.value && 
+        (statusYes.checked || statusNo.checked))
+}
 
 // function that clears all fields in add book form
 function clearForm()
@@ -123,6 +133,7 @@ function clearForm()
     pageField.value = '';
     statusYes.checked = false;
     statusNo.checked = false;
+    formError.textContent = '';
 }
 
 function toggleForm() {

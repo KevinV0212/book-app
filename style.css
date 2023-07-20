@@ -147,6 +147,11 @@ form .add-btn, .form-toggler{
     color:white;
 }
 
+.form-error {
+    font-size:1.25rem;
+    font-weight:bold;
+    color:red
+}
 .bookshelf {
     width:400px;
     padding:30px;
