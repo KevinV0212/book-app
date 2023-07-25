@@ -9,15 +9,27 @@ const formError = document.querySelector('.form-error');
 let myLibrary = [];
 
 // Book object constructor
-function Book(title, author, numPages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.numPages = numPages;
-    this.isRead = isRead;
+// function Book(title, author, numPages, isRead) {
+//     this.title = title;
+//     this.author = author;
+//     this.numPages = numPages;
+//     this.isRead = isRead;
 
-    this.info = function() {
-        return(
-        `${title} by ${author}, ${numPages} pages, ${isRead ? ' read' : 'rot read yet'}`)
+//     this.info = function() {
+//         return(
+//         `${title} by ${author}, ${numPages} pages, ${isRead ? ' read' : 'rot read yet'}`)
+//     }
+// }
+
+class Book{
+    constructor(title, author, numPages, isRead) {
+        this.title = title;
+        this.author = author;
+        this.numPages = numPages;
+        this.isRead = isRead;
+    }
+    get info() {
+        return `${this.title} by ${this.author}, ${this.numPages} pages, ${this.isRead ? ' read' : 'rot read yet'}`
     }
 }
 
@@ -41,7 +53,7 @@ function displayBookshelf()
         
         let cardInfo = document.createElement('div');
         cardInfo.classList.add('card-info');
-        cardInfo.textContent = book.info();
+        cardInfo.textContent = book.info;
 
 
         //add delete button to entry
